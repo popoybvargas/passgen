@@ -1,0 +1,22 @@
+{
+  "name": "zv-passgen",
+  "version": "1.0.0",
+  "description": "Generate password that is super strong enough but still easy to memorize.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/popoybvargas/passgen.git"
+  },
+  "keywords": [
+    "strong",
+    "random",
+    "password"
+  ],
+  "author": "Popoy Vargas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/popoybvargas/passgen/issues"
+  },
+  "homepage": "https://github.com/popoybvargas/passgen#readme",
+  "dependencies": {}
+}
