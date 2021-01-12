@@ -1,9 +1,8 @@
 const fs = require('fs');
 
-if (!fs.existsSync('./words.js'))
+if (!fs.existsSync(`${__dirname}/../../words.js`))
 {
-  const initialWordsArray = require('./node_modules/zv-passgen/words.js');
-  fs.copyFileSync('./node_modules/zv-passgen/words.js', './words.js');
+  fs.copyFileSync(`${__dirname}/words.js`, `${__dirname}/../../words.js`);
 }
 
 const randomIndex = length => Math.floor(Math.random() * length);
