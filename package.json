@@ -1,6 +1,6 @@
 {
   "name": "zv-passgen",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Generate password that is super strong enough but still easy to memorize.",
   "main": "index.js",
   "repository": {
