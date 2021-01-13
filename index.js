@@ -1,9 +1,9 @@
+const path = require('path');
 const fs = require('fs');
 
-if (!fs.existsSync(`${__dirname}/../../words.js`))
-{
-  fs.copyFileSync(`${__dirname}/words.js`, `${__dirname}/../../words.js`);
-}
+const APP_ROOT_WORDS_DB = path.join(__dirname, '../../words.js');
+
+if (!fs.existsSync(APP_ROOT_WORDS_DB)) fs.copyFileSync(path.join(__dirname, 'words.js'), APP_ROOT_WORDS_DB);
 
 const randomIndex = length => Math.floor(Math.random() * length);
 
@@ -32,14 +32,11 @@ const capitalizeALetter = word =>
   return word.replace(word[index], word[index].toUpperCase());
 };
 
-class pass
+module.exports = class
 {
-  constructor()
-  {
-    this.words = require('./words');
-  };
+  static words = require(APP_ROOT_WORDS_DB);
 
-  generate()
+  static generate()
   {
     const randomIndex1 = randomIndex(this.words.length);
     let randomIndex2 = randomIndex(this.words.length);
@@ -49,20 +46,17 @@ class pass
     return (addNumber(this.words[randomIndex1]) + '-' + capitalizeALetter(this.words[randomIndex2]));
   };
 
-  deleteWord(word)
+  static deleteWord(word)
   {
-    if (this.words.includes(word.toLowerCase()))
+    if (this.words.indexOf(word.trim().toLowerCase()) >= 0)
     {
-      this.words.splice(this.words.indexOf(word.toLowerCase()), 1);
-      fs.writeFileSync('./words.js', 'module.exports = ' + JSON.stringify(this.words));
+      const updatedWordsArray = this.words.filter(w => w !== word);
+      fs.writeFileSync(APP_ROOT_WORDS_DB, 'module.exports = ' + JSON.stringify(updatedWordsArray));
+      this.words = updatedWordsArray;
       
-      return `"${word}" has been removed from the dictionary`;
+      return `"${word}" has been deleted.`;
     }
-    else
-    {
-      return `"${word}" not found in the dictionary (NOTHING TO DELETE)`;
-    }
-  };
-}
 
-module.exports = new pass();
+    return `"${word}" NOT found in the dictionary. nothing to delete.`;
+  };
+};
